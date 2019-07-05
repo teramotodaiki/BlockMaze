@@ -15,11 +15,10 @@ public class FollowPlayer : MonoBehaviour
         ToPlayer = Player.position - transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // ぬるぬると近く
         var target = Player.position - ToPlayer;
-        transform.position = Vector3.Lerp(transform.position, target, 0.9f);
+        transform.position = Vector3.Lerp(transform.position, target, 0.05f);
     }
 }
