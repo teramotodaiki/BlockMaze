@@ -40,7 +40,31 @@ public class MazeGenerator : MonoBehaviour
 
         Validate();
 
-        // 迷路を初期化する
+        Initialize();
+    }
+
+    int cursor;
+    bool prevKeyDown;
+    // Update is called once per frame
+    void Update()
+    {
+        Validate();
+
+        Traverse(cursor++);
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            Initialize();
+        }
+    }
+
+    /// <summary>
+    /// 迷路を初期化する
+    /// </summary>
+    void Initialize()
+    {
+        if (MazeParent) Destroy(MazeParent.gameObject);
+
         table = new int[MazeWidth, MazeHeight];
 
         MazeParent = new GameObject("MazeParent").transform;
@@ -49,15 +73,8 @@ public class MazeGenerator : MonoBehaviour
 
         GenerateAround();
         GenerateEven();
-    }
 
-    int cursor;
-    // Update is called once per frame
-    void Update()
-    {
-        Validate();
-
-        Traverse(cursor++);
+        cursor = 0;
     }
 
     /// <summary>
