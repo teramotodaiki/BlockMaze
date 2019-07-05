@@ -5,6 +5,7 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
     public Transform Player;
+	public float smooth = 0.05f;
 
     Vector3 ToPlayer;
 
@@ -19,6 +20,6 @@ public class FollowPlayer : MonoBehaviour
     {
         // ぬるぬると近く
         var target = Player.position - ToPlayer;
-        transform.position = Vector3.Lerp(transform.position, target, 0.05f);
+        transform.position = Vector3.Lerp(transform.position, target, smooth);
     }
 }
