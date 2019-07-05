@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class MazeGenerator : MonoBehaviour
 {
-    public Transform Parent;
+    Transform MazeParent;
     public GameObject Ground;
     public GameObject WallPrefab;
 
     int MazeWidth;
     int MazeHeight;
-    Vector3 Offset;
 
     int[,] table; // [x, z]
 
@@ -38,12 +37,14 @@ public class MazeGenerator : MonoBehaviour
         var height = (int)scale.z;
         MazeHeight = height % 2 == 1 ? height : height + 1;
 
-        Offset = Vector3.Scale(scale, new Vector3(-0.5f, 0, -0.5f)) +  new Vector3(0.5f, 0.5f, 0.5f);
-
         Validate();
 
         // 迷路を初期化する
         table = new int[MazeWidth, MazeHeight];
+
+        MazeParent = new GameObject("MazeParent").transform;
+        MazeParent.parent = Ground.transform;
+        MazeParent.localPosition = new Vector3(-0.5f, 0.5f, -0.5f);
 
         GenerateAround();
         GenerateEven();
@@ -124,8 +125,9 @@ public class MazeGenerator : MonoBehaviour
     void PutWall(int x, int z)
     {
         table[x, z] = 1;
-
-        var pos = new Vector3(x, 0, z) + Offset;
-        Instantiate(WallPrefab, pos, Quaternion.identity, Parent);
+        
+        var wall = Instantiate(WallPrefab, MazeParent);
+        wall.transform.localPosition = new Vector3(x, 0, z);
+        wall.transform.Translate(wall.transform.localScale / 2);
     }
 }
