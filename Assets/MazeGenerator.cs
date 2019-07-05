@@ -6,7 +6,8 @@ public class MazeGenerator : MonoBehaviour
 {
     Transform MazeParent;
     public GameObject Ground;
-    public GameObject WallPrefab;
+    public GameObject GreenWallPrefab;
+    public GameObject RedWallPrefab;
 
     int MazeWidth;
     int MazeHeight;
@@ -66,13 +67,13 @@ public class MazeGenerator : MonoBehaviour
     {
         for (int x = 0; x < MazeWidth; x++)
         {
-            PutWall(x, 0);
-            PutWall(x, MazeHeight - 1);
+            PutWall(x, 0, GreenWallPrefab);
+            PutWall(x, MazeHeight - 1, GreenWallPrefab);
         }
         for (int y = 1; y < MazeHeight - 1; y++)
         {
-            PutWall(0, y);
-            PutWall(MazeWidth - 1, y);
+            PutWall(0, y, GreenWallPrefab);
+            PutWall(MazeWidth - 1, y, GreenWallPrefab);
         }
     }
 
@@ -85,7 +86,7 @@ public class MazeGenerator : MonoBehaviour
         {
             for (int z = MazeHeight - 3; z > 0; z -= 2)
             {
-                PutWall(x, z);
+                PutWall(x, z, GreenWallPrefab);
             }
         }
     }
@@ -114,7 +115,7 @@ public class MazeGenerator : MonoBehaviour
 
         var number = Random.Range(0, candidacies.Count);
         var pos = candidacies[number];
-        PutWall(pos[0], pos[1]);
+        PutWall(pos[0], pos[1], RedWallPrefab);
     }
 
     /// <summary>
@@ -122,11 +123,11 @@ public class MazeGenerator : MonoBehaviour
     /// </summary>
     /// <param name="x"></param>
     /// <param name="z"></param>
-    void PutWall(int x, int z)
+    void PutWall(int x, int z, GameObject prefab)
     {
         table[x, z] = 1;
         
-        var wall = Instantiate(WallPrefab, MazeParent);
+        var wall = Instantiate(prefab, MazeParent);
         wall.transform.localPosition = new Vector3(x, 0, z);
         wall.transform.Translate(wall.transform.localScale / 2);
     }

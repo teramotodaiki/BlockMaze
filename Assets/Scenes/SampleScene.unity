@@ -228,7 +228,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 458541299}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.21, y: 0.9, z: -5.39}
+  m_LocalPosition: {x: -13.21, y: 0.9, z: -5.9}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -550,7 +550,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ground: {fileID: 840681788}
-  WallPrefab: {fileID: 6115377657027277340, guid: d67832f900fcd43559b9a809c0da4547,
+  GreenWallPrefab: {fileID: 6115377657027277340, guid: d67832f900fcd43559b9a809c0da4547,
+    type: 3}
+  RedWallPrefab: {fileID: 6115377657027277340, guid: 8156bb76ffae847d99340ccb08c542bc,
     type: 3}
 --- !u!4 &1856188211
 Transform:
