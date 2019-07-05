@@ -122,7 +122,7 @@ public class MazeGenerator : MonoBehaviour
         var x = (index % length) * 2 + 2;
         var z = index / length * 2 + 2;
 
-        if (z > MazeHeight - 2 || x > MazeWidth - 2) return; // 置き終わった
+        if (z > MazeHeight - 2) return; // 置き終わった
 
         var candidacies = new List<int[]>();
         if (z == 2 && table[x, z - 1] == 0) candidacies.Add(new int[2] { x, z - 1 });
